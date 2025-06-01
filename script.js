@@ -205,3 +205,229 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
+/*******************************
+ *  TRAVEL.HTML SCRIPT SECTION
+ *******************************/
+document.addEventListener('DOMContentLoaded', () => {
+  /* ======== SEARCH: universal (visible text) + error message ======== */
+  const searchInput = document.getElementById('search-input');
+  const searchBtn = document.getElementById('search-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const blogCards = document.querySelectorAll('.blog-card');
+  const searchError = document.getElementById('search-error');
+
+  function filterBlogs() {
+    const query = searchInput.value.trim().toLowerCase();
+    let anyVisible = false;
+
+    blogCards.forEach(card => {
+      const visibleText = card.innerText.toLowerCase();
+      if (visibleText.includes(query)) {
+        card.style.display = '';
+        anyVisible = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Toggle clear button
+    if (query.length > 0) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+    }
+
+    // Show or hide “no results” message
+    if (!anyVisible && query.length > 0) {
+      searchError.classList.add('visible');
+    } else {
+      searchError.classList.remove('visible');
+    }
+  }
+
+  // Press Enter in input
+  searchInput.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      filterBlogs();
+    }
+    // Toggle clear button as user types
+    if (searchInput.value.trim().length > 0) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+      searchError.classList.remove('visible');
+      blogCards.forEach(card => (card.style.display = ''));
+    }
+  });
+
+  // Click “ਖੋਜੋ”
+  searchBtn.addEventListener('click', () => {
+    filterBlogs();
+    searchInput.focus();
+  });
+
+  // Click “ਦੂਰ ਕਰੋ”
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    blogCards.forEach(card => (card.style.display = ''));
+    clearBtn.classList.add('hidden');
+    searchError.classList.remove('visible');
+    searchInput.focus();
+  });
+
+
+  /* ======== MODAL LOGIC (IMAGES AREA + TEXT AREA + Prev/Next) ======== */
+  const modal = document.getElementById('blog-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDate = document.getElementById('modal-date');
+  const modalContent = document.getElementById('modal-content');
+  const modalImagesContainer = document.getElementById('images-container');
+
+  const modalPrevBtn = document.getElementById('modal-prev');
+  const modalNextBtn = document.getElementById('modal-next');
+
+  const modalClose = document.getElementById('modal-close');
+
+  // Scroll arrows for images
+  const scrollLeftBtn = document.getElementById('img-scroll-left');
+  const scrollRightBtn = document.getElementById('img-scroll-right');
+
+  // Full‐screen overlay:
+  const enlargeOverlay = document.getElementById('image-enlarge-overlay');
+  const enlargedImage = document.getElementById('enlarged-image');
+  const enlargeClose = document.getElementById('enlarge-close');
+
+  // Convert NodeList to array:
+  const cardArray = Array.from(blogCards);
+
+  let currentImages = [];
+  let currentCardIndex = 0;  // index within cardArray
+
+  function openModalFromIndex(idx) {
+    currentCardIndex = idx;
+    const card = cardArray[idx];
+
+    // Populate Title / Date / Content:
+    modalTitle.textContent = card.dataset.title;
+    modalDate.textContent = card.dataset.date;
+    modalContent.textContent = card.dataset.content;
+
+    // Parse images JSON array
+    try {
+      currentImages = JSON.parse(card.dataset.images);
+    } catch {
+      currentImages = [];
+    }
+
+    // Build inline images
+    modalImagesContainer.innerHTML = '';
+    currentImages.forEach((url) => {
+      const thumb = document.createElement('img');
+      thumb.src = url;
+      thumb.alt = 'Blog Image';
+      thumb.classList.add('modal-thumb');
+      // On click, open overlay with full-size image
+      thumb.addEventListener('click', () => {
+        enlargedImage.src = url;
+        enlargeOverlay.classList.add('active');
+      });
+      modalImagesContainer.appendChild(thumb);
+    });
+
+    // Show/hide scroll arrows depending on overflow
+    setTimeout(() => { // wait for images container to render
+      if (modalImagesContainer.scrollWidth > modalImagesContainer.clientWidth) {
+        scrollLeftBtn.style.display = 'flex';
+        scrollRightBtn.style.display = 'flex';
+      } else {
+        scrollLeftBtn.style.display = 'none';
+        scrollRightBtn.style.display = 'none';
+      }
+    }, 50);
+
+    // Update Prev/Next buttons state
+    updateModalNavButtons();
+
+    // Display the modal
+    modal.classList.add('modal-open');
+  }
+
+  function updateModalNavButtons() {
+    // Prev button
+    if (currentCardIndex > 0) {
+      modalPrevBtn.disabled = false;
+    } else {
+      modalPrevBtn.disabled = true;
+    }
+    // Next button
+    if (currentCardIndex < cardArray.length - 1) {
+      modalNextBtn.disabled = false;
+    } else {
+      modalNextBtn.disabled = true;
+    }
+  }
+
+  function closeModal() {
+    modal.classList.remove('modal-open');
+  }
+
+  /* ========= EVENT LISTENERS ========= */
+
+  // “ਹੋਰ ਪੜ੍ਹੋ” button opens modal:
+  blogCards.forEach((card, idx) => {
+    const readBtn = card.querySelector('.read-more-btn');
+    readBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModalFromIndex(idx);
+    });
+  });
+
+  // Prev blog
+  modalPrevBtn.addEventListener('click', () => {
+    if (currentCardIndex > 0) {
+      openModalFromIndex(currentCardIndex - 1);
+    }
+  });
+  // Next blog
+  modalNextBtn.addEventListener('click', () => {
+    if (currentCardIndex < cardArray.length - 1) {
+      openModalFromIndex(currentCardIndex + 1);
+    }
+  });
+
+  // Close modal:
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (modal.classList.contains('modal-open')) {
+        closeModal();
+      }
+      if (enlargeOverlay.classList.contains('active')) {
+        enlargeOverlay.classList.remove('active');
+      }
+    }
+  });
+
+  // IMAGE SCROLL ARROWS
+  scrollLeftBtn.addEventListener('click', () => {
+    modalImagesContainer.scrollBy({ left: -200, behavior: 'smooth' });
+  });
+  scrollRightBtn.addEventListener('click', () => {
+    modalImagesContainer.scrollBy({ left: 200, behavior: 'smooth' });
+  });
+
+  // ENLARGE OVERLAY logic:
+  enlargeClose.addEventListener('click', () => {
+    enlargeOverlay.classList.remove('active');
+  });
+  enlargeOverlay.addEventListener('click', (e) => {
+    if (e.target === enlargeOverlay) {
+      enlargeOverlay.classList.remove('active');
+    }
+  });
+});
