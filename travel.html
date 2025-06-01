@@ -1,1 +1,388 @@
 
+<!DOCTYPE html>
+<html lang="pa" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ਘੁੱਦਾ ਸਿੰਘ – ਯਾਤਰਾ ਬਲੌਗ</title>
+
+  <!-- GTranslate -->
+  <div class="gtranslate_wrapper" aria-label="ਭਾਸ਼ਾ ਬਦਲੋ"></div>
+  <script>
+    window.gtranslateSettings = {
+      default_language: "pa",
+      native_language_names: true,
+      languages: ["pa", "en"],
+      wrapper_selector: ".gtranslate_wrapper",
+      flag_size: 24,
+      switcher_horizontal_position: "right",
+      flag_style: "3d",
+    };
+  </script>
+  <script src="https://cdn.gtranslate.net/widgets/latest/dwf.js" defer></script>
+
+  <!-- Tailwind & Custom CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="overflow-x-hidden relative travel-bg">
+
+  <!-- HEADER -->
+  <header class="site-header bg-white shadow-md">
+    <div class="container branding flex items-center justify-between py-4 px-6">
+      <a href="home.html" aria-label="ਘੁੱਦਾ ਸਿੰਘ ਮੁੱਖ ਪੰਨਾ" class="flex items-center">
+        <img
+          src="https://i.ibb.co/WNZyPg4G/image.png"
+          alt="ਘੁੱਦਾ ਸਿੰਘ Logo"
+          class="logo w-12 h-12 rounded-full object-cover"
+          loading="lazy"
+        />
+        <h1 class="site-title notranslate ml-4 text-2xl font-bold text-amber-700" translate="no">
+          ਘੁੱਦਾ ਸਿੰਘ
+        </h1>
+      </a>
+
+      <nav class="desktop-nav hidden md:block" role="navigation" aria-label="ਮੁੱਖ ਨੈਵੀਗੇਸ਼ਨ">
+        <ul class="nav-list flex space-x-8">
+          <li class="nav-item"><a href="home.html" class="nav-link">ਮੁੱਖ ਪੰਨਾ</a></li>
+          <li class="nav-item"><a href="travel.html" class="nav-link text-amber-700 font-bold">ਯਾਤਰਾ ਬਲੌਗ</a></li>
+          <li class="nav-item"><a href="home.html#philosophy" class="nav-link">ਸੋਚ</a></li>
+          <li class="nav-item"><a href="home.html#journey" class="nav-link">ਯਾਤਰਾਵਾਂ</a></li>
+          <li class="nav-item"><a href="home.html#footprint" class="nav-link">ਔਨਲਾਈਨ ਪ੍ਰਭਾਵ</a></li>
+        </ul>
+      </nav>
+
+      <button
+        id="hamburger"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="hamburger-btn md:hidden text-2xl text-gray-700 focus:outline-none hover:text-amber-700"
+      >
+        ☰
+      </button>
+    </div>
+
+    <nav
+      id="mobile-menu"
+      class="mobile-nav fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out"
+      aria-hidden="true"
+      role="navigation"
+    >
+      <div class="p-6 flex justify-between items-center border-b">
+        <h2 class="text-xl font-semibold">ਮੈਨੂ</h2>
+        <button id="mobile-close" class="text-2xl text-gray-700 focus:outline-none hover:text-amber-700" aria-label="Close menu">
+          ×
+        </button>
+      </div>
+      <ul class="flex flex-col space-y-4 p-6">
+        <li><a href="home.html" class="nav-link mobile-nav-link">ਮੁੱਖ ਪੰਨਾ</a></li>
+        <li><a href="home.html#philosophy" class="nav-link mobile-nav-link">ਸੋਚ</a></li>
+        <li><a href="home.html#journey" class="nav-link mobile-nav-link">ਯਾਤਰਾਵਾਂ</a></li>
+        <li><a href="home.html#footprint" class="nav-link mobile-nav-link">ਔਨਲਾਈਨ ਪ੍ਰਭਾਵ</a></li>
+        <li><a href="travel.html" class="nav-link mobile-nav-link text-amber-700 font-bold">ਯਾਤਰਾ ਬਲੌਗ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-8 pb-16 container mx-auto px-6">
+
+    <!-- SEARCH BAR -->
+    <section id="blog-search" class="mb-12">
+      <h2 class="text-4xl font-extrabold text-amber-700 mb-4 text-center">ਯਾਤਰਾ ਦੇ ਬਲੌਗ</h2>
+      <div class="relative max-w-xl mx-auto">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="ਖੋਜੋ… (ਸਿਰਲੇਖ, ਸਾਰ, ਜਾਂ ਸਮੱਗਰੀ)"
+          class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-400 pr-12"
+        />
+        <!-- Search Button -->
+        <button
+          id="search-btn"
+          class="absolute right-10 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-amber-700 focus:outline-none"
+          aria-label="ਖੋਜੋ"
+        >
+          🔍
+        </button>
+        <!-- Clear Button -->
+        <button
+          id="clear-btn"
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-amber-700 focus:outline-none hidden"
+          aria-label="ਦੂਰ ਕਰੋ"
+        >
+          ×
+        </button>
+      </div>
+      <p id="search-error">ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ</p>
+    </section>
+
+    <!-- BLOG GRID -->
+    <section id="blog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Blog Card #1 -->
+      <div
+        class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
+        data-title="ਸਾਹਸਕ ਅਫਰੀਕਨ ਯਾਤਰਾ"
+        data-date="May 15, 2025"
+        data-excerpt="ਅਫਰੀਕਾ ਦੀਆਂ ਬੇਢੰਗੀਆਂ ਰੇਤਾਂ 'ਤੇ 10,000+ ਕਿਮੀ ਸਾਈਕਲਿੰਗ…"
+        data-content="ਇਹ ਭਰੂ ਕੇ ਬਲੌਗ ਵਿੱਚ ਅਸੀਂ ਅਫਰੀਕਾ ਦੀ ਰੇਤਲੇ ਰਾਹਾਂ ਅਤੇ ਦੱਖਣੀ ਅਫਰੀਕਾ ਦੀਆਂ ਸੁੰਦਰ ਜੰਗਲਾਂ ਦੀ ਇੱਕ ਵਿਸਥਾਰਿਤ ਸਫਰਵੀਰਣ ਦੇਵਾਂਗੇ। ਸਥਾਨਕ ਲੋਕਾਂ ਨਾਲ ਮੁਲਾਕਾਤ, ਸਾਈਕਲ ਰਸਤੇ ਦੀਆਂ ਚੁਣੌਤੀਆਂ, ਅਤੇ ਹਰ ਦਿਨ ਦੀਆਂ ਯਾਦਾਂ ਦੀ ਗੱਲ…"
+        data-images='[
+          "https://i.ibb.co/1Xctq0X/africa1.jpg",
+          "https://i.ibb.co/4RY9pr4/africa2.jpg",
+          "https://i.ibb.co/Fw2cJXn/africa3.jpg"
+        ]'
+      >
+        <img
+          src="https://i.ibb.co/1Xctq0X/africa1.jpg"
+          alt="ਅਫਰੀਕਾ ਯਾਤਰਾ"
+          class="h-48 w-full object-cover"
+        />
+        <div class="p-4 flex-grow">
+          <h3 class="text-xl font-semibold text-amber-700 mb-1">ਸਾਹਸਕ ਅਫਰੀਕਨ ਯਾਤਰਾ</h3>
+          <p class="text-sm text-gray-500 mb-2">May 15, 2025</p>
+          <p class="text-gray-700 text-sm mb-4">ਅਫਰੀਕਾ ਦੀਆਂ ਬੇਢੰਗੀਆਂ ਰੇਤਾਂ 'ਤੇ 10,000+ ਕਿਮੀ ਸਾਈਕਲਿੰਗ…</p>
+        </div>
+        <div class="p-4 pt-0">
+          <button
+            class="read-more-btn w-full bg-amber-700 text-white font-medium py-2 rounded-lg hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          >
+            ਹੋਰ ਪੜ੍ਹੋ
+          </button>
+        </div>
+      </div>
+
+      <!-- Blog Card #2 -->
+      <div
+        class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
+        data-title="ਭਾਰਤ ਦੇ ਹਿਮਾਲਿਆਈ ਰਾਹ"
+        data-date="April 02, 2025"
+        data-excerpt="ਲਦਾਖ ਦੇ ਉੱਚ-ਉੱਚ ਪਹਾੜਾਂ ਵਿੱਚ 110 ਕਿਮੀ 6 ਘੰਟਿਆਂ ਵਿੱਚ…"
+        data-content="ਇਸ ਬਲੌਗ ਵਿਚ, ਅਸੀਂ ਭਾਰਤ ਦੇ ਹਿਮਾਲਿਆਈ ਇਲਾਕੇ (ਖਾਰਦੁੰਗਲਾ) ਦੀ ਦਿਵਾਨਗੀ ਵਾਲੀ ਯਾਤਰਾ ਦੀ ਵਿਸਤਾਰ ਨਾਲ ਵਰਣਨਾ ਕਰਾਂਗੇ। ਹਰੇਕ ਸ੍ਰੋਤ, ਹਰ ਕਮਾਨਾ, ਅਤੇ ਹਰ ਦਿਨ ਦੀਆਂ ਪਹਾੜੀ ਠੰਢ ਬਾਰੇ ਜਾਣੋਂ।"
+        data-images='[
+          "https://i.ibb.co/9yL2JLK/ladakh1.jpg",
+          "https://i.ibb.co/9rN8dS7/ladakh2.jpg"
+        ]'
+      >
+        <img
+          src="https://i.ibb.co/9yL2JLK/ladakh1.jpg"
+          alt="ਭਾਰਤ ਯਾਤਰਾ"
+          class="h-48 w-full object-cover"
+        />
+        <div class="p-4 flex-grow">
+          <h3 class="text-xl font-semibold text-amber-700 mb-1">ਭਾਰਤ ਦੇ ਹਿਮਾਲਿਆਈ ਰਾਹ</h3>
+          <p class="text-sm text-gray-500 mb-2">April 02, 2025</p>
+          <p class="text-gray-700 text-sm mb-4">ਲਦਾਖ ਦੇ ਉੱਚ-ਉੱਚ ਪਹਾੜਾਂ ਵਿੱਚ 110 ਕਿਮੀ 6 ਘੰਟਿਆਂ ਵਿੱਚ…</p>
+        </div>
+        <div class="p-4 pt-0">
+          <button
+            class="read-more-btn w-full bg-amber-700 text-white font-medium py-2 rounded-lg hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          >
+            ਹੋਰ ਪੜ੍ਹੋ
+          </button>
+        </div>
+      </div>
+
+      <!-- Blog Card #3 -->
+      <div
+        class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
+        data-title="ਮੱਧ-ਪੂਰਵ ਦਾ ਸੁੰਦਰ ਦ੍ਰਿਸ਼"
+        data-date="March 10, 2025"
+        data-excerpt="ਕਿੰਗ ਫਾਹਦ ਕੋਜ਼ਵੇਅ 'ਤੇ 25 ਕਿਮੀ ਬਾਈਕਿੰਗ ਦਾ ਅਨੋਖਾ ਅਨੁਭਵ…"
+        data-content="ਇਸ ਬਲੌਗ ਵਿੱਚ, ਅਸੀਂ ਮੱਧ-ਪੂਰਵ ਦੇ ਸੁਹਾਵਣੇ ਨਜ਼ਾਰਿਆਂ, ਬਣਿਆਨ ਦੀਆਂ ਰਾਤਾਂ, ਅਤੇ ਕਿੰਗ ਫਾਹਦ ਕੋਜ਼ਵੇਅ ਉੱਤੇ ਸਾਈਕਲ ਰਾਹੀ ਪਾਰ ਕਰਨ ਦੀ ਸ਼ਾਨਦਾਰ ਯਾਤਰਾ ਦੀ ਪੂਰੀ ਜਾਣਕਾਰੀ ਦੇਵਾਂਗੇ।"
+        data-images='[
+          "https://i.ibb.co/5vfzHW7/bahrain1.jpg",
+          "https://i.ibb.co/4fs5MN8/bahrain2.jpg",
+          "https://i.ibb.co/D5h2BPC/bahrain3.jpg"
+        ]'
+      >
+        <img
+          src="https://i.ibb.co/5vfzHW7/bahrain1.jpg"
+          alt="ਮੱਧ-ਪੂਰਵ ਯਾਤਰਾ"
+          class="h-48 w-full object-cover"
+        />
+        <div class="p-4 flex-grow">
+          <h3 class="text-xl font-semibold text-amber-700 mb-1">ਮੱਧ-ਪੂਰਵ ਦਾ ਸੁੰਦਰ ਦ੍ਰਿਸ਼</h3>
+          <p class="text-sm text-gray-500 mb-2">March 10, 2025</p>
+          <p class="text-gray-700 text-sm mb-4">ਕਿੰਗ ਫਾਹਦ ਕੋਜ਼ਵੇਅ 'ਤੇ 25 ਕਿਮੀ ਬਾਈਕਿੰਗ ਦਾ ਅਨੋਖਾ ਅਨੁಭವ…</p>
+        </div>
+        <div class="p-4 pt-0">
+          <button
+            class="read-more-btn w-full bg-amber-700 text-white font-medium py-2 rounded-lg hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          >
+            ਹੋਰ ਪੜ੍ਹੋ
+          </button>
+        </div>
+      </div>
+
+      <!-- (Add more blog-card blocks as needed) -->
+    </section>
+  </main>
+
+  <!-- ============= BLOG MODAL ============= -->
+  <div id="blog-modal" class="hidden">
+    <div class="modal-box bg-white rounded-lg shadow-xl mx-4 my-8 overflow-hidden max-w-2xl md:max-w-4xl w-full">
+
+      <!-- FLEX CONTAINER -->
+      <div class="modal-inner flex flex-col md:flex-row h-full">
+
+        <!-- LEFT: IMAGES AREA -->
+        <div class="images-area relative md:w-1/2 bg-gray-100">
+          <!-- Left arrow -->
+          <button id="img-scroll-left" class="scroll-btn hidden md:flex items-center justify-center absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 text-white w-8 h-8 rounded-full focus:outline-none">
+            ◀
+          </button>
+
+          <!-- Scrollable container for images -->
+          <div id="images-container" class="overflow-x-auto whitespace-nowrap flex items-center h-full">
+            <!-- JS will insert <img class="modal-thumb"> here -->
+          </div>
+
+          <!-- Right arrow -->
+          <button id="img-scroll-right" class="scroll-btn hidden md:flex items-center justify-center absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 text-white w-8 h-8 rounded-full focus:outline-none">
+            ▶
+          </button>
+        </div>
+
+        <!-- RIGHT: TEXT AREA -->
+        <div class="text-area overflow-y-auto p-4 md:w-1/2 bg-white">
+          <h2 id="modal-title" class="text-2xl font-bold text-amber-700 mb-2"></h2>
+          <p id="modal-date" class="text-sm text-gray-500 mb-4"></p>
+          <div id="modal-content" class="text-gray-700 leading-relaxed whitespace-pre-wrap"></div>
+           <!-- Prev/Next Buttons -->
+          <div class="flex justify-between">
+            <button
+              id="modal-prev"
+              class="bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg hover:bg-gray-300 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              ◀ ਪਿਛਲਾ
+            </button>
+            <button
+              id="modal-next"
+              class="bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg hover:bg-gray-300 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              ਅਗਲਾ ▶
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLOSE BUTTON -->
+      <button
+        id="modal-close"
+        class="absolute top-3 right-3 text-2xl text-gray-700 hover:text-amber-700 focus:outline-none"
+        aria-label="ਬੰਦ ਕਰੋ"
+      >×</button>
+    </div>
+  </div>
+
+  <!-- ======== IMAGE ENLARGE OVERLAY ======== -->
+  <div id="image-enlarge-overlay" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 px-4">
+    <button
+      id="enlarge-close"
+      class="absolute top-4 right-4 text-3xl text-white hover:text-amber-400 focus:outline-none"
+      aria-label="ਬੰਦ ਕਰੋ"
+    >×</button>
+    <img id="enlarged-image" src="" alt="Enlarged Blog Image" class="max-w-full max-h-full object-contain" />
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer bg-gray-900 text-gray-200 py-12" aria-labelledby="footer-heading">
+    <div class="footer-container container mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="footer-links">
+        <h4 class="footer-heading font-semibold mb-4">Navigate</h4>
+        <ul class="footer-nav space-y-2">
+          <li><a href="home.html" class="footer-link">ਮੁੱਖ ਪੰਨਾ</a></li>
+          <li><a href="travel.html" class="footer-link">ਯਾਤਰਾ ਬਲੌਗ</a></li>
+          <li><a href="home.html#philosophy" class="footer-link">ਸੋਚ</a></li>
+          <li><a href="home.html#journey" class="footer-link">ਯਾਤਰਾਵਾਂ</a></li>
+          <li><a href="home.html#footprint" class="footer-link">ਔਨਲਾਈਨ ਪ੍ਰਭਾਵ</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4 class="footer-heading font-semibold mb-4">Follow Us</h4>
+        <ul class="social-icons flex space-x-6">
+          <li>
+            <a href="https://instagram.com/amritpalsinghghudda" class="social-link" target="_blank" aria-label="Instagram">
+              <svg class="icon icon-instagram w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.36 3.608 
+                     1.335.975.975 1.274 2.242 1.335 3.608.058 
+                     1.265.07 1.645.07 4.849s-.012 3.584-.07 
+                     4.849c-.062 1.366-.36 2.633-1.335 
+                     3.608-.975.975-2.242 1.274-3.608 
+                     1.335-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.36-3.608-1.335-.975-.975-1.274-2.242-1.335-3.608C2.175 
+                     15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.36-2.633 
+                     1.335-3.608.975-.975 2.242-1.274 
+                     3.608-1.335C8.416 2.175 8.796 2.163 12 2.163m0-2.163C8.741 
+                     0 8.332.014 7.052.072 5.76.13 4.597.443 
+                     3.607 1.433 2.616 2.424 2.303 3.587 
+                     2.245 4.879 2.187 6.159 2.173 6.568 
+                     2.173 12s.014 5.841.072 7.121c.058 
+                     1.292.371 2.455 1.362 3.446.991.991 
+                     2.154 1.304 3.446 1.362 1.28.058 
+                     1.689.072 7.121.072s5.841-.014 
+                     7.121-.072c1.292-.058 2.455-.371 
+                     3.446-1.362.991-.991 1.304-2.154 
+                     1.362-3.446.058-1.28.072-1.689.072-7.121s-.014-5.841-.072-7.121c-.058-1.292-.371-2.455-1.362-3.446C19.455.443 
+                     18.292.13 17 .072 15.719.014 15.31 0 12 0z"
+                />
+                <path
+                  d="M12 5.838a6.162 6.162 0 1 0 0 
+                     12.324 6.162 6.162 0 0 0 0-12.324zm0 
+                     10.162a3.999 3.999 0 1 1 0-7.998 3.999 
+                     3.999 0 0 1 0 7.998z"
+                />
+                <circle cx="18.406" cy="5.594" r="1.44" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/amritpalsinghghudda" class="social-link" target="_blank" aria-label="Facebook">
+              <svg class="icon icon-facebook w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M22.675 0h-21.35C.597 0 0 .597 0 
+                     1.333V22.67C0 23.403.597 24 1.325 
+                     24H12.82v-9.333H9.692V11.08h3.128V8.413c0-3.1 
+                     1.893-4.788 4.66-4.788 1.325 0 2.463.097 
+                     2.795.142v3.24h-1.918c-1.504 
+                     0-1.796.715-1.796 1.763v2.31h3.59l-.467 
+                     3.587h-3.123V24h6.116c.728 0 1.325-.597 
+                     1.325-1.333V1.333C24 .597 23.403 0 22.675 
+                     0z"
+                />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@AmritPalSinghGhudda" class="social-link" target="_blank" aria-label="YouTube">
+              <svg class="icon icon-youtube w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M23.498 6.186a2.966 2.966 0 0 0-2.087-2.087C19.706 3.5 
+                     12 3.5 12 3.5s-7.706 0-9.411.599A2.966 2.966 0 0 0 
+                     .502 6.186 31.21 31.21 0 0 0 0 12a31.21 31.21 0 0 0 
+                     .502 5.814 2.966 2.966 0 0 0 2.087 2.087C4.294 
+                     20.5 12 20.5 12 20.5s7.706 0 9.411-.599a2.966 
+                     2.966 0 0 0 2.087-2.087A31.21 31.21 0 0 0 
+                     24 12a31.21 31.21 0 0 0-.502-5.814zM9.75 
+                     15.5v-7l6 3.5-6 3.5z"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-copy text-center sm:text-left text-sm flex flex-col justify-center">
+        <p>© ਘੁੱਦਾ ਸਿੰਘ 2025 – All rights reserved.</p>
+        <p class="mt-2">
+          Website developed by 
+          <a href="https://instagram.com/thrillyverse" target="_blank" class="footer-link font-semibold">ThrillyVerse</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
